@@ -21,19 +21,27 @@ public class MessagingClient {
 	// setup of a messaging connection to a messaging server
 	public MessageConnection connect () {
 
+/**
+ * Oppretter en socket forbindelse for å sikre at serveren og porten kan kommunisere
+ * Dersom det oppstår en feil får vi et unntak, og en feilmelding skrives ut.
+ * @return connection
+ */
 		// client-side socket for underlying TCP connection to messaging server
-		Socket clientSocket;
+		Socket clientSocket = null;
 
 		MessageConnection connection = null;
 		
-		// TODO - START
+
 		// connect to messaging server using a TCP socket
 		// create and return a corresponding messaging connection
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
+		try{
+			clientSocket = new Socket(server, port);
+			connection = new MessageConnection(clientSocket);
+		} catch (Exception e){
+			System.out.println("MessagingClient: " + e.getMessage());
+			//e.printStackTrace();
+		}
+
 		return connection;
 	}
 }

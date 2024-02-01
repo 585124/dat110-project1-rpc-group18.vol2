@@ -32,33 +32,49 @@ public class MessageConnection {
 		}
 	}
 
-	public void send(Message message) {
+	public void send(Message message){
+/**
+ * @param message
+ * Kaller på encapsulate som pakker inn meldingen (Protocol layers).
+ * Flush tvinger meldingen til å bli sendt og ikke bli liggende i buffer.
+ */
+		byte[] data = MessageUtils.encapsulate(message);
 
-		byte[] data;
-		
-		// TODO - START
+		try{
+
+			outStream.write(data);
+			outStream.flush();
+		} catch (IOException e){
+			System.out.println("Outputstream Failed: " + e.getMessage());
+			//e.printStackTrace();
+		}
+
 		// encapsulate the data contained in the Message and write to the output stream
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-			
-		// TODO - END
+
 
 	}
 
 	public Message receive() {
-
+/**
+ * Tar imot meldingen og leser opp til 128 bytes.
+ * Dersom meldingen er større får vi feilmelding.
+ * Pakker ut meldingen (decapsulate).
+ * @return message
+ */
 		Message message = null;
-		byte[] data;
-		
-		// TODO - START
+		byte[] data = null;
+
+
 		// read a segment from the input stream and decapsulate data into a Message
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-		
+
+
+		try{
+			data = inStream.readNBytes(128);
+		} catch (IOException e){
+			System.out.println("Instream Failed: " + e.getMessage());
+			//e.printStackTrace();
+		}
+		message = MessageUtils.decapsulate(data);
 		return message;
 		
 	}
