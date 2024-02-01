@@ -7,89 +7,69 @@ import no.hvl.dat110.TODO;
 public class RPCUtils {
 	
 	public static byte[] encapsulate(byte rpcid, byte[] payload) {
-		
-		byte[] rpcmsg = null;
-		
-		// TODO - START
-		
+		/**
+		 * @param rpcid
+		 * @param payload
+		 * Denne metoden innkapsler RPC-meldinger.
+		 * @return rpcmsg
+		 */
+		byte[] rpcmsg = new byte[payload.length + 1];
+		rpcmsg[0] = rpcid;
+		for (int i = 0; i < payload.length; i++){
+			rpcmsg[i + 1] = payload[i];
+		}
 		// Encapsulate the rpcid and payload in a byte array according to the RPC message syntax / format
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-		
 		return rpcmsg;
 	}
 	
 	public static byte[] decapsulate(byte[] rpcmsg) {
-		
-		byte[] payload = null;
-		
-		// TODO - START
-		
+		/**
+		 * @param rpcmsg
+		 * Denne metoden avkapsler RPC meldinger.
+		 * @return payload
+		 */
+		byte[] payload = new byte[rpcmsg.length - 1];
+		for (int i = 0; i < payload.length; i++){
+			payload[i] = rpcmsg[i + 1];
+		}
+
 		// Decapsulate the rpcid and payload in a byte array according to the RPC message syntax
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-		
 		return payload;
 		
 	}
 
 	// convert String to byte array
 	public static byte[] marshallString(String str) {
-		
-		byte[] encoded = null;
-		
-		// TODO - START 
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-		
+		/**
+		 * @param str
+		 * Konverterer en String til en byte.
+		 * @return encoded
+		 */
+		byte[] encoded = str.getBytes();
 		return encoded;
 	}
 
 	// convert byte array to a String
 	public static String unmarshallString(byte[] data) {
-		
-		String decoded = null; 
-		
-		// TODO - START 
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-		
+		/**
+		 * @param data
+		 * Konverterer en byte-array til en String.
+		 * @return decoded
+		 */
+		String decoded = new String(data);
 		return decoded;
 	}
 	
 	public static byte[] marshallVoid() {
 		
 		byte[] encoded = null;
-		
-		// TODO - START 
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-				
-		// TODO - END
-		
+
 		return encoded;
 		
 	}
 	
 	public static void unmarshallVoid(byte[] data) {
-		
-		// TODO
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+
 		
 	}
 
@@ -115,34 +95,37 @@ public class RPCUtils {
 		
 	}
 
-	// integer to byte array representation
+	/**
+	 * @param x
+	 * Oppretter en buffer ved hjelp av Bytebuffer-klassen med
+	 * kapasitet på 4 bytes.
+	 * buffer.putInt(x) putter verdien x inn i bufferen.
+	 * putInt konverterer heltallet til et byte-array i henhold til
+	 * standard byte-rekkefølge (big-endian som standard).
+	 * @return buffer.array().
+	 */
 	public static byte[] marshallInteger(int x) {
-		
-		byte[] encoded = null;
-		
-		// TODO - START 
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-		
-		return encoded;
+
+
+		ByteBuffer buffer = ByteBuffer.allocate(4);
+		buffer.putInt(x);
+		return buffer.array();
+
 	}
-	
+
+	/**
+	 * Vi oppretter en ny buffer. Så bruker vi metoden wrap som settes
+	 * rundt 'data' tabellen.
+	 * @param data
+	 * @return buffer.getInt()
+	 * På grunn av wrap metoden kan vi hente verdiene
+	 * direkte fra 'data' tabellen.
+	 */
 	// byte array representation to integer
 	public static int unmarshallInteger(byte[] data) {
-		
-		int decoded = 0;
-		
-		// TODO - START 
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-		
-		return decoded;
-		
+
+		ByteBuffer buffer = ByteBuffer.wrap(data);
+		return buffer.getInt();
+
 	}
 }

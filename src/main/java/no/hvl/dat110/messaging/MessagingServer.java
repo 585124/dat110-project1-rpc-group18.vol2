@@ -23,16 +23,16 @@ public class MessagingServer {
 			ex.printStackTrace();
 		}
 	}
-
+	/**
+	 * Aksepterer en forbindelse til klienten.
+	 * Så bruker vi messageConnection for å sende og motta meldinger fra klienten.
+	 * Har med et unntak dersom det oppstår problemer med input/output data.
+	 * @return connection
+	 */
 	// accept an incoming connection from a client
 	public MessageConnection accept() {
 
-		/**
-		 * Aksepterer en forbindelse til klienten.
-		 * Så bruker vi messageConnection for å sende og motta meldinger fra klienten.
-		 * Har med et unntak dersom det oppstår problemer med input/output data.
-		 * @return connection
-		 */
+
 		MessageConnection connection = null;
 
 		// accept TCP connection on welcome socket and create messaging connection to be returned

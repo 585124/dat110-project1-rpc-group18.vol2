@@ -37,28 +37,40 @@ public class RPCServer {
 		boolean stop = false;
 		
 		while (!stop) {
-	    
-		   byte rpcid = 0;
-		   Message requestmsg, replymsg;
-		   
-		   // TODO - START
-		   // - receive a Message containing an RPC request
-		   // - extract the identifier for the RPC method to be invoked from the RPC request
-		   // - extract the method's parameter by decapsulating using the RPCUtils
-		   // - lookup the method to be invoked
-		   // - invoke the method and pass the param
-		   // - encapsulate return value 
-		   // - send back the message containing the RPC reply
-			
-		   if (true)
-				throw new UnsupportedOperationException(TODO.method());
-		   
-		   // TODO - END
 
-			// stop the server if it was stop methods that was called
-		   if (rpcid == RPCCommon.RPIDSTOP) {
-			   stop = true;
+			byte rpcid = 0;
+			Message requestmsg, replymsg;
+			try{
+			   //Mottar medling
+			    requestmsg = connection.receive();
+			   byte[] request = requestmsg.getData();
+
+			   //Dekapsulere og indentifisere RPCmetoden
+			   byte prcid = request[0];
+			   byte[] param = RPCUtils.decapsulate(request);
+
+			   //Finn den tilsvarende metoden
+			   RPCRemoteImpl method = services.get(rpcid);
+			   if (method == null){
+				   throw new UnsupportedOperationException("Metode ikke funnet.");
+			   }
+
+			   //Kjør metoden og få svar
+				byte[] response = method.invoke(param);
+
+			   //Send tilbake et svar
+				replymsg = new Message(RPCUtils.encapsulate(rpcid, response));
+				connection.send(replymsg);
+
+				//Sjekk om det er stop-metoden
+				if(rpcid == RPCCommon.RPIDSTOP){
+					stop = true;
+				}
+
+		   }catch(Exception e){
+			   e.printStackTrace();
 		   }
+
 		}
 	
 	}

@@ -3,6 +3,8 @@ package no.hvl.dat110.rpc;
 import no.hvl.dat110.TODO;
 import no.hvl.dat110.messaging.*;
 
+import java.io.IOException;
+
 public class RPCClient {
 
 	// underlying messaging client used for RPC communication
@@ -15,54 +17,43 @@ public class RPCClient {
 	
 		msgclient = new MessagingClient(server,port);
 	}
-	
-	public void connect() {
-		
-		// TODO - START
-		// connect using the RPC client
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-	}
-	
-	public void disconnect() {
-		
-		// TODO - START
-		// disconnect by closing the underlying messaging connection
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-	}
 
-	/*
-	 Make a remote call om the method on the RPC server by sending an RPC request message and receive an RPC reply message
-
-	 rpcid is the identifier on the server side of the method to be called
-	 param is the marshalled parameter of the method to be called
+	/**
+	 * Etablerer en forbindelse til serveren ved hjelp av MessagingClient.
 	 */
+	public void connect() {
 
+			connection = msgclient.connect();
+
+	}
+
+	/**
+	 * Dersom det er tilkobling så lukkes forbindelsen.
+	 */
+	public void disconnect() {
+		if (connection != null){
+			connection.close();
+		}
+
+	}
+
+	/**
+	 *
+	 * @param rpcid
+	 * @param param
+	 * Connection.send sender meldingen.
+	 * reply mottar meldingen som er sendt.
+	 * @return returnval
+	 */
 	public byte[] call(byte rpcid, byte[] param) {
 		
 		byte[] returnval = null;
-		
-		// TODO - START
+		byte[] rpcmsg = RPCUtils.encapsulate(rpcid, param);
+		connection.send(new Message(rpcmsg));
 
-		/*
+		Message reply = connection.receive();
+		returnval = RPCUtils.decapsulate(reply.getData());
 
-		The rpcid and param must be encapsulated according to the RPC message format
-
-		The return value from the RPC call must be decapsulated according to the RPC message format
-
-		*/
-				
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
 		return returnval;
 		
 	}
