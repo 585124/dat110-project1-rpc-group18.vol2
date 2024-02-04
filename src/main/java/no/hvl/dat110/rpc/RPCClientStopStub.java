@@ -1,5 +1,11 @@
 package no.hvl.dat110.rpc;
 
+/**
+ * Denne klassen tillater klienten å kalle den
+ * innebygde stoppmetoden på RPC-serveren ved å
+ * sende en RPC-forespørsel gjennom RPC-klienten
+ * og håndtere eventuelle svar som returneres
+ */
 public class RPCClientStopStub extends RPCLocalStub {
 
 	public RPCClientStopStub(RPCClient rpcclient) {

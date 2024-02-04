@@ -1,5 +1,12 @@
 package no.hvl.dat110.rpc;
 
+
+/**
+ * Denne klassen implementerer en spesifikk
+ * RPC-servermetode for å stoppe serveren når den
+ * kalles av en klient gjennom RPC
+ *
+ */
 public class RPCServerStopImpl extends RPCRemoteImpl {
 
 	public RPCServerStopImpl(byte rpcid, RPCServer rpcserver) {
