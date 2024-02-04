@@ -5,9 +5,6 @@ package no.hvl.dat110.rpc;
 public abstract class RPCRemoteImpl {
 
 	/**
-	 *
-	 * @param rpcid
-	 * @param rpcserver
 	 * Denne metoden setter opp et rammeverk for RPC-
 	 * serverimplementasjon ved å registrere seg hos
 	 * RPC serveren og definere en abstrakt invoke metode
