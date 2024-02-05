@@ -63,10 +63,8 @@ public class RPCUtils {
 	}
 	
 	public static byte[] marshallVoid() {
-		
-		byte[] encoded = null;
 
-		return encoded;
+		return new byte[0];
 		
 	}
 	
