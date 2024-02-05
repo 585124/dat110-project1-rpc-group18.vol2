@@ -13,6 +13,8 @@ public class RPCUtils {
 		 * Denne metoden innkapsler RPC-meldinger.
 		 * @return rpcmsg
 		 */
+		int len = payload != null ? payload.length : 0;
+
 		byte[] rpcmsg = new byte[payload.length + 1];
 		rpcmsg[0] = rpcid;
 		for (int i = 0; i < payload.length; i++){
