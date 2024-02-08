@@ -8,7 +8,7 @@ public class Controller  {
 	
 	private static int N = 5;
 	
-	public static void main (String[] args) {
+	public static void main (String[] args) throws InterruptedException {
 		
 		DisplayStub display;
 		SensorStub sensor;
@@ -34,7 +34,11 @@ public class Controller  {
 		sensorclient.connect();
 
 		//utfører en løkke for å lese temp og vise den
-		for (int i = 0; i < N; i++) display.write(String.valueOf(sensor.read()));
+		for (int i = 0; i < N; i++) {
+			int val = sensor.read();
+			display.write(String.valueOf(val));
+			Thread.sleep(2000);
+		}
 
 		stopdisplay.stop();
 		stopsensor.stop();

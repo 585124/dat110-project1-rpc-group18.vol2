@@ -1,6 +1,7 @@
 package no.hvl.dat110.rpc;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import no.hvl.dat110.TODO;
 
@@ -13,18 +14,21 @@ public class RPCUtils {
 		 * Denne metoden innkapsler RPC-meldinger.
 		 * @return rpcmsg
 		 */
-		int len = payload != null ? payload.length : 0;
+		//int len = payload != null ? payload.length : 0;
 
 		byte[] rpcmsg = new byte[payload.length + 1];
 		rpcmsg[0] = rpcid;
-		for (int i = 0; i < payload.length; i++){
-			rpcmsg[i + 1] = payload[i];
-		}
+        System.arraycopy(payload, 0, rpcmsg, 1, payload.length);
 		// Encapsulate the rpcid and payload in a byte array according to the RPC message syntax / format
 		return rpcmsg;
 	}
-	
+	/**
+	 * @param rpcmsg
+	 * Denne metoden avkapsler RPC meldinger.
+	 * @return payload
+	 */
 	public static byte[] decapsulate(byte[] rpcmsg) {
+
 		/**
 		 * @param rpcmsg
 		 * Denne metoden avkapsler RPC meldinger.
@@ -58,13 +62,14 @@ public class RPCUtils {
 		 * Konverterer en byte-array til en String.
 		 * @return decoded
 		 */
-		String decoded = new String(data);
+		String decoded = new String(data, StandardCharsets.UTF_8);
 		return decoded;
 	}
 	
 	public static byte[] marshallVoid() {
 
-		return new byte[0];
+		Studentassisten: return new byte[0];
+
 		
 	}
 	
@@ -105,12 +110,15 @@ public class RPCUtils {
 	 * @return buffer.array().
 	 */
 	public static byte[] marshallInteger(int x) {
+		byte[] encoded = null;
 
 
-		ByteBuffer buffer = ByteBuffer.allocate(4);
-		buffer.putInt(x);
-		return buffer.array();
+		//ByteBuffer buffer = ByteBuffer.allocate(4);
+		//buffer.putInt(x);
+		//return buffer.array();
+		encoded = ByteBuffer.allocate(4).putInt(x).array();
 
+		return encoded;
 	}
 
 	/**

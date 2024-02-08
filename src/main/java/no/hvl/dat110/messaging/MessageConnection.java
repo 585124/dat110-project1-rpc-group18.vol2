@@ -67,14 +67,20 @@ public class MessageConnection {
 
 		// read a segment from the input stream and decapsulate data into a Message
 
+		data = new byte[MessageUtils.SEGMENTSIZE];
 
 		try{
-			data = inStream.readNBytes(128);
+			int read = inStream.read(data, 0, MessageUtils.SEGMENTSIZE);
+			message = MessageUtils.decapsulate(data);
+//			if (read != 128){
+//				throw new IOException(" ");
+//			}
 		} catch (IOException e){
 			System.out.println("Instream Failed: " + e.getMessage());
 			//e.printStackTrace();
 		}
-		message = MessageUtils.decapsulate(data);
+        //assert data != null;
+
 		return message;
 		
 	}
