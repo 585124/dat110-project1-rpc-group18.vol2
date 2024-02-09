@@ -18,7 +18,11 @@ public class RPCUtils {
 
 		byte[] rpcmsg = new byte[payload.length + 1];
 		rpcmsg[0] = rpcid;
-        System.arraycopy(payload, 0, rpcmsg, 1, payload.length);
+
+		for(int i=0; i<payload.length; i++){
+			rpcmsg[i+1] = payload[i];
+		}
+        //System.arraycopy(payload, 0, rpcmsg, 1, payload.length);
 		// Encapsulate the rpcid and payload in a byte array according to the RPC message syntax / format
 		return rpcmsg;
 	}
@@ -62,7 +66,8 @@ public class RPCUtils {
 		 * Konverterer en byte-array til en String.
 		 * @return decoded
 		 */
-		String decoded = new String(data, StandardCharsets.UTF_8);
+		//String decoded = new String(data, StandardCharsets.UTF_8);
+		String decoded = new String(data);
 		return decoded;
 	}
 	
