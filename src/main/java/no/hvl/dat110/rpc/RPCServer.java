@@ -47,7 +47,7 @@ public class RPCServer {
 
 			   System.out.println(request.length);
 			   //Dekapsulere og indentifisere RPCmetoden
-			   byte prcid = request[0];
+			   rpcid = request[0];
 			   byte[] param = RPCUtils.decapsulate(request);
 
 			   //Finn den tilsvarende metoden
