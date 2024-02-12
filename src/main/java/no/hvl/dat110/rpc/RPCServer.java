@@ -45,7 +45,7 @@ public class RPCServer {
 			    requestmsg = connection.receive();
 			   byte[] request = requestmsg.getData();
 
-			   System.out.println(request.length);
+			   //System.out.println(request.length);
 			   //Dekapsulere og indentifisere RPCmetoden
 			   rpcid = request[0];
 			   byte[] param = RPCUtils.decapsulate(request);
