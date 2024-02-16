@@ -11,6 +11,9 @@ import no.hvl.dat110.messaging.Message;
 import no.hvl.dat110.messaging.MessageUtils;
 import no.hvl.dat110.messaging.MessagingClient;
 import no.hvl.dat110.messaging.MessagingServer;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TestMessaging {
@@ -21,7 +24,6 @@ public class TestMessaging {
 		byte[] clientsent = { 1, 2, 3, 4, 5 };
 
 		AtomicBoolean failure = new AtomicBoolean(false);
-
 		Thread server = new Thread() {
 
 			public void run() {
@@ -46,7 +48,7 @@ public class TestMessaging {
 
 					connection.close();
 
-					assertTrue(Arrays.equals(clientsent, serverreceived));
+                    assertArrayEquals(clientsent, serverreceived);
 
 				} catch (Exception e) {
 					e.printStackTrace();
