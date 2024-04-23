@@ -32,25 +32,23 @@ public class MessageConnection {
 		}
 	}
 
+	/**
+	 * @param message
+	 * Kaller på encapsulate som pakker inn meldingen, krypteter (Protocol layers).
+	 * Flush tvinger meldingen til å bli sendt og ikke bli liggende i buffer.
+	 */
 	public void send(Message message){
-/**
- * @param message
- * Kaller på encapsulate som pakker inn meldingen (Protocol layers).
- * Flush tvinger meldingen til å bli sendt og ikke bli liggende i buffer.
- */
-		byte[] data = MessageUtils.encapsulate(message);
+
+	byte[] data = MessageUtils.encapsulate(message);
 
 		try{
 
-			outStream.write(data);
-			outStream.flush();
+			outStream.write(data); //Denne skriver meldingen til outstream
+			outStream.flush(); //Tvinger meldingen til å bli sendt ut av buffer
 		} catch (IOException e){
 			System.out.println("Outputstream Failed: " + e.getMessage());
 			//e.printStackTrace();
 		}
-
-		// encapsulate the data contained in the Message and write to the output stream
-
 
 	}
 
@@ -64,22 +62,19 @@ public class MessageConnection {
 		Message message = null;
 		byte[] data = null;
 
-
 		// read a segment from the input stream and decapsulate data into a Message
 
 		data = new byte[MessageUtils.SEGMENTSIZE];
 
 		try{
 			int read = inStream.read(data, 0, MessageUtils.SEGMENTSIZE);
-			message = MessageUtils.decapsulate(data);
-//			if (read != 128){
-//				throw new IOException(" ");
-//			}
-		} catch (IOException e){
+			//Hente meldinger fra instream, begynner å lese av fra plass 0, til og med 128(segmetsize)
+			message = MessageUtils.decapsulate(data); //dekrypterer eller pakker ut data
+
+		} catch (IOException e) {
 			System.out.println("Instream Failed: " + e.getMessage());
-			//e.printStackTrace();
+			//dersom størrelsen er større en 128
 		}
-        //assert data != null;
 
 		return message;
 		

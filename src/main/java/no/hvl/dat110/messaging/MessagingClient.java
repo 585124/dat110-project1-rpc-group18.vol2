@@ -27,6 +27,8 @@ public class MessagingClient {
  * @return connection
  */
 		// client-side socket for underlying TCP connection to messaging server
+
+		//oppretter og initialiserer en socket forbindelse
 		Socket clientSocket = null;
 
 		MessageConnection connection = null;
@@ -39,7 +41,6 @@ public class MessagingClient {
 			connection = new MessageConnection(clientSocket);
 		} catch (Exception e){
 			System.out.println("MessagingClient: " + e.getMessage());
-			//e.printStackTrace();
 		}
 
 		return connection;

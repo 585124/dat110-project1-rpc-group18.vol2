@@ -12,6 +12,7 @@ public class MessageUtils {
 	public static String MESSAGINGHOST = "localhost";
 
 	public static byte[] encapsulate(Message message) {
+		//Krypterer meldingen for å klargjøre til sending (pakker den inn)
 		/**
 		 * @param message
 		 * Oppretter en tabell med 128 plasser.
@@ -32,7 +33,7 @@ public class MessageUtils {
 	}
 
 	public static Message decapsulate(byte[] segment) {
-
+	//Pakker ut meldingen ved mottak, dekryptere
 		/**
 		 * @param segment
 		 * Pakker ut meldingen, leser av tabellen og kopierer hver

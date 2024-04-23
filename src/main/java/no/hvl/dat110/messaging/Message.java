@@ -5,21 +5,20 @@ import no.hvl.dat110.TODO;
 
 public class Message {
 
-	// the up to 127 bytes of data (payload) that a message can hold
+	//Kontruktøren
 	private byte[] data;
-	//Endre senere.
+
+	//Test melding
 	String ok = "Hei";
 
-	// construction a Message with the data provided
+
 	public Message(byte[] data) {
-		
 
-
-		//Dersom det ikke er noe data, får vi en feilmelding
+		//Dersom det ikke er noe data (null), får vi en feilmelding
 		if (data == null)
 			throw new IllegalArgumentException("Data kan ikke være null.");
 
-		//Konverterer til byte-array og sjekker lengden
+		//Konverterer til byte-array og sjekker lengden (127 bytes, som oppgitt i oppg.)
 		byte[] dataBytes = ok.getBytes();
 		if (data.length > 127){
 			throw new IllegalArgumentException("Data kan ikke være lengre enn 127 bytes.");
@@ -31,5 +30,5 @@ public class Message {
 	public byte[] getData() {
 		return this.data; 
 	}
-
+	//Denne metoden brukes kun til å hente ut data tabellen
 }

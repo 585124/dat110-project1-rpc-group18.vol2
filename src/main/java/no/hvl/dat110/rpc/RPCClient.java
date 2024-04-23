@@ -49,10 +49,11 @@ public class RPCClient {
 		
 		byte[] returnval = null;
 		byte[] rpcmsg = RPCUtils.encapsulate(rpcid, param);
-		connection.send(new Message(rpcmsg));
 
-		Message reply = connection.receive();
-		returnval = RPCUtils.decapsulate(reply.getData());
+		connection.send(new Message(rpcmsg)); //sender meldingen
+
+		Message reply = connection.receive(); //mottar meldingen som er sendt
+		returnval = RPCUtils.decapsulate(reply.getData()); //dekrypterer/ pekker ut meldingen
 
 		return returnval;
 		
