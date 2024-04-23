@@ -11,8 +11,11 @@ public class DisplayStub extends RPCLocalStub {
 	}
 	
 	public void write (String message) {
+		//hovedoppgave til denne metoden er å få ut en melding på displayet
+
+
 		//RPC-ID for write-metoden
-		byte rpcid = (byte) Common.WRITE_RPCID;
+		byte rpcid = (byte) Common.WRITE_RPCID; //typekonvertering til byte, for å sikre riktig format
 
 		//Marshalling av strengen til et byte-array
 		byte[] request = RPCUtils.marshallString(message);
@@ -23,17 +26,10 @@ public class DisplayStub extends RPCLocalStub {
 		//utfører RPC-kallet ved å sende RPC mld til serveren
 		byte[] reply = rpcclient.call(rpcid, request);
 
+		//unmarshall meldingen som er mottatt
 		RPCUtils.unmarshallVoid(reply);
 
-
-		
 		// implement marshalling, call and unmarshalling for write RPC method
-		
-//		if ( reply != null && reply.length > 0) {
-//			System.out.println("Bekreftelse mottatt fra serveren");
-//		} else{
-//			System.out.println("Ingen bekreftelse mottatt fra serveren");
-//		}
-		// Denne if setningen sjekker om mld er tom
+
 	}
 }

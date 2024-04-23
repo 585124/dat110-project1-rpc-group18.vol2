@@ -33,7 +33,7 @@ public class MessageUtils {
 	}
 
 	public static Message decapsulate(byte[] segment) {
-	//Pakker ut meldingen ved mottak, dekryptere
+	//Pakker ut/ dekrypterer meldingen ved mottak, dekryptere
 		/**
 		 * @param segment
 		 * Pakker ut meldingen, leser av tabellen og kopierer hver
